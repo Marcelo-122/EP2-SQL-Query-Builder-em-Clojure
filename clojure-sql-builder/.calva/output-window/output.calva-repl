@@ -104,3 +104,11 @@ clj꞉clojure-sql-builder.core꞉> 
 clj꞉clojure-sql-builder.core꞉> 
 "SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul'))"
 clj꞉clojure-sql-builder.core꞉> 
+"SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul'))"
+clj꞉clojure-sql-builder.core꞉> 
+"SELECT abc, xyz FROM usuario (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul')) ORDER BY idade desc LIMIT 10"
+clj꞉clojure-sql-builder.core꞉> 
+"SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul'))"
+clj꞉clojure-sql-builder.core꞉> 
+"SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul')) ORDER BY idade desc LIMIT 10"
+clj꞉clojure-sql-builder.core꞉> 
