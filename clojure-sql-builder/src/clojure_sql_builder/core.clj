@@ -14,6 +14,14 @@
     (case op
       :igual_a   (str campo " = " (formata-valor valor))
       :maior_que (str campo " > " (formata-valor valor))
+      :diferente_de   (str campo " <> " (formata-valor valor))
+      :not_like (str campo " NOT LIKE " (formata-valor valor)) 
+      :menor_que      (str campo " < " (formata-valor valor))
+      :menor_igual_que (str campo " <= " (formata-valor valor))
+      :maior_igual_que (str campo " >= " (formata-valor valor))
+      :entre          (str campo " BETWEEN " (formata-valor valor))
+      :like           (str campo " LIKE " (formata-valor valor)) 
+      :not_in (str campo " NOT IN (" (clojure.string/join ", " (map formata-valor valor)) ")")
       :em        (str campo " IN (" (clojure.string/join ", " (map formata-valor valor)) ")")
       ;; outros comparadores aqui (:menor_que, :diferente_de, etc.)
       (throw (Exception. (str "Operador desconhecido: " op))))))
@@ -45,14 +53,6 @@
     :else
     (throw (Exception. (str "Cláusula inválida: " clausula)))))
   
- ;; --- Teste no REPL ---
-(def filtro-exemplo
-  (list 'e_s [{:campo :idade, :maior_que 20}
-              (list 'ou_s [{:campo :camiseta, :igual_a "verde"}
-                           {:campo :camiseta, :igual_a "azul"}])]))
-
-(processa-clausula filtro-exemplo)
-
 (defn to-sql [estado-query]
   (let [campos (clojure.string/join ", " (:fields estado-query))
         tabela (:table estado-query)
@@ -81,5 +81,9 @@
 (-> (busca_tabela "usuario")
     (campos ["abc" "xyz"])
     (filtros (list 'e_s [{:campo :nome, :igual_a "José"}
-                         {:campo :idade, :maior_que 20}]))
+                         {:campo :idade, :maior_que 20}
+                         {:campo :id, :em [10 20 30]}
+                         {:campo :status, :igual_a true}
+                         (list 'ou_s [{:campo :camiseta, :igual_a "verde"}
+                                      {:campo :camiseta, :igual_a "azul"}])]))
     to-sql)
