@@ -1,4 +1,6 @@
-(ns clojure-sql-builder.core)
+(ns clojure-sql-builder.core
+  (:gen-class)) 
+
 (require '[clojure.string :as str])
 ;; Formata um valor para SQL (strings precisam de aspas simples)
 (defn formata-valor [valor]
@@ -95,3 +97,21 @@
     (order-by {:campo :idade :direcao :desc})
     (limit 10)
     to-sql)
+
+
+;; ---Teste com lein run ---
+(defn -main
+  [& args]
+  (let [query (-> (busca_tabela "usuario")
+                  (campos ["abc" "xyz"])
+                  (filtros (list 'e_s [{:campo :nome, :igual_a "José"}
+                                      {:campo :idade, :maior_que 20}
+                                      {:campo :id, :em [10 20 30]}
+                                      {:campo :status, :igual_a true}
+                                      (list 'ou_s [{:campo :camiseta, :igual_a "verde"}
+                                                  {:campo :camiseta, :igual_a "azul"}])]))
+                  (order-by {:campo :idade :direcao :desc})
+                  (limit 10)
+                  to-sql)]
+    (println "SQL Query:")
+    (println query)))
