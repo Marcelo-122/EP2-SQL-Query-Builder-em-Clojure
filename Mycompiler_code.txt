@@ -1,0 +1,51 @@
+-- Para testar a Query gerada pelo builder basta copiar e colar esse codigo no 
+-- Mycompiler versão SQL ---> https://www.mycompiler.io/pt/new/sql
+
+-- Criar a tabela
+CREATE TABLE usuario (
+    id INTEGER PRIMARY KEY,
+    nome VARCHAR(50),
+    idade INTEGER,
+    status BOOLEAN,
+    camiseta VARCHAR(20),
+    abc VARCHAR(10),
+    xyz VARCHAR(10)
+);
+
+-- Inserir os dados
+INSERT INTO usuario (id, nome, idade, status, camiseta, abc, xyz) VALUES
+(1, 'José', 25, true, 'verde', 'ABC123', 'XYZ001'),
+(2, 'José', 18, true, 'azul', 'ABC124', 'XYZ002'),
+(3, 'José', 30, true, 'verde', 'ABC125', 'XYZ003'),
+(4, 'José', 22, false, 'azul', 'ABC126', 'XYZ004'),
+(5, 'José', 35, true, 'amarela', 'ABC127', 'XYZ005'),
+(6, 'José', 28, true, 'verde', 'ABC128', 'XYZ006'),
+(7, 'José', 19, true, 'azul', 'ABC129', 'XYZ007'),
+(8, 'José', 32, true, 'verde', 'ABC130', 'XYZ008'),
+(9, 'José', 26, true, 'preta', 'ABC131', 'XYZ009'),
+(10, 'José', 40, true, 'azul', 'ABC132', 'XYZ010'),
+(11, 'José', 23, true, 'verde', 'ABC133', 'XYZ011'),
+(12, 'José', 29, false, 'azul', 'ABC134', 'XYZ012'),
+(13, 'José', 31, true, 'verde', 'ABC135', 'XYZ013'),
+(14, 'José', 27, true, 'branca', 'ABC136', 'XYZ014'),
+(15, 'José', 33, true, 'azul', 'ABC137', 'XYZ015'),
+(16, 'Maria', 25, true, 'verde', 'ABC138', 'XYZ016'),
+(17, 'Maria', 30, true, 'azul', 'ABC139', 'XYZ017'),
+(18, 'Carlos', 22, true, 'verde', 'ABC140', 'XYZ018'),
+(19, 'Ana', 28, true, 'azul', 'ABC141', 'XYZ019'),
+(20, 'José', 24, true, 'verde', 'ABC142', 'XYZ020'),
+(21, 'José', 37, true, 'azul', 'ABC143', 'XYZ021'),
+(22, 'José', 21, true, 'vermelha', 'ABC144', 'XYZ022'),
+(23, 'José', 38, true, 'verde', 'ABC145', 'XYZ023'),
+(24, 'José', 26, true, 'azul', 'ABC146', 'XYZ024'),
+(25, 'José', 34, false, 'verde', 'ABC147', 'XYZ025'),
+(26, 'José', 39, true, 'roxa', 'ABC148', 'XYZ026'),
+(27, 'José', 41, true, 'verde', 'ABC149', 'XYZ027'),
+(28, 'José', 42, true, 'azul', 'ABC150', 'XYZ028'),
+(29, 'José', 20, true, 'verde', 'ABC151', 'XYZ029'),
+(30, 'José', 36, true, 'cinza', 'ABC152', 'XYZ030'),
+(31, 'José', 45, true, 'verde', 'ABC153', 'XYZ031'),
+(32, 'José', 43, true, 'azul', 'ABC154', 'XYZ032');
+
+-- Query gerada pelo builder
+SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20 AND id IN (10, 20, 30) AND status = true AND (camiseta = 'verde' OR camiseta = 'azul')) ORDER BY idade desc LIMIT 10
