@@ -52,3 +52,34 @@
                            {:campo :camiseta, :igual_a "azul"}])]))
 
 (processa-clausula filtro-exemplo)
+
+(defn to-sql [estado-query]
+  (let [campos (clojure.string/join ", " (:fields estado-query))
+        tabela (:table estado-query)
+        where  (:where estado-query)]
+    (if where
+      (str "SELECT " campos " FROM " tabela " WHERE " where)
+      (str "SELECT " campos " FROM " tabela))))
+
+;; Funçoes builders
+(defn busca_tabela [nome-tabela]
+  ;; O ponto de partida: cria o mapa de estado inicial
+  {:table nome-tabela
+   :fields ["*"] ; Padrão é *
+   :where nil})
+
+(defn campos [estado-query lista-campos]
+  ;; Recebe o estado, atualiza os campos e retorna um NOVO estado
+  (assoc estado-query :fields lista-campos))
+
+(defn filtros [estado-query clausula-where]
+  ;; Recebe o estado, processa a cláusula where e retorna um NOVO estado
+  (assoc estado-query :where (processa-clausula clausula-where)))
+
+;; --- Teste no REPL ---
+;; Usando a macro -> para encadear as chamadas de forma legível
+(-> (busca_tabela "usuario")
+    (campos ["abc" "xyz"])
+    (filtros (list 'e_s [{:campo :nome, :igual_a "José"}
+                         {:campo :idade, :maior_que 20}]))
+    to-sql)

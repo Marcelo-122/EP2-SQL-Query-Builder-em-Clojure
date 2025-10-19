@@ -93,3 +93,8 @@ clj꞉clojure-sql-builder.core꞉> 
 clj꞉clojure-sql-builder.core꞉> 
 "(idade > 20 AND (camiseta = 'verde' OR camiseta = 'azul'))"
 clj꞉clojure-sql-builder.core꞉> 
+; Execution error (ClassCastException) at (REPL:1).
+; null
+clj꞉clojure-sql-builder.core꞉> 
+"SELECT abc, xyz FROM usuario WHERE (nome = 'José' AND idade > 20)"
+clj꞉clojure-sql-builder.core꞉> 
