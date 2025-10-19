@@ -62,8 +62,6 @@
     (clojure.string/join " " (filter some? ["SELECT" campos "FROM" tabela where order-by limit]))))
 
 ;; Funçoes builders
-
-
 (defn busca_tabela [nome-tabela]
   ;; O ponto de partida: cria o mapa de estado inicial
   {:table nome-tabela
